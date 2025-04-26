@@ -1,5 +1,3 @@
-import json
-
 import pandas as pd
 import torch
 from torch.utils.data import Dataset, DataLoader
@@ -11,7 +9,7 @@ nltk.download('punkt')
 nltk.download('punkt_tab')
 
 # Đọc dữ liệu từ CSV
-data = pd.read_csv('data_cleaned.csv').dropna()
+data = pd.read_csv('sentiment_data.csv').dropna()
 texts = data['text'].tolist()
 labels = data['label'].map({'Positive': 0, 'Negative': 1, 'Neutral': 2}).tolist()
 

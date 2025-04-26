@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Đọc dữ liệu
-df = pd.read_csv("datasetEnglishGPT.csv")
+df = pd.read_csv("datasetVietnamese.csv")
 
 # 1. Kiểm tra cấu trúc cột
 expected_columns = ['text', 'label']
@@ -48,7 +48,7 @@ label_counts = df['label'].value_counts(normalize=True) * 100
 print(label_counts.round(2).astype(str) + '%')
 
 # Lưu file đã được làm sạch
-output_path = "data_cleaned.csv"
+output_path = "sentiment_data.csv"
 df.drop(columns=['word_count'], inplace=True)  # Xóa cột phụ trợ nếu không cần
 df.to_csv(output_path, index=False)
 print(f"\n✅ Dữ liệu sạch đã được lưu tại: {output_path}")

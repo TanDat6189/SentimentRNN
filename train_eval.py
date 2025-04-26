@@ -7,7 +7,6 @@ from sklearn.metrics import accuracy_score, f1_score
 import json
 
 def train_and_evaluate(model, train_loader, test_loader, epochs=10, lr=0.01):
-
     # Khởi tạo loss function và optimizer SGD (không dùng Adam)
     # [Sinh viên bổ sung: dùng CrossEntropyLoss và optim.SGD]
     criterion = nn.CrossEntropyLoss()
@@ -55,8 +54,3 @@ for pretrained in [True, False]:
 
 with open("results.json", "w") as f:
     json.dump(results, f, indent=4)
-
-
-
-# Lưu lại mô hình đã huấn luyện
-# torch.save(model.state_dict(), 'my_model.pt')

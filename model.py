@@ -41,7 +41,7 @@ class RNNModel(nn.Module):
 
         # Chuyển text thành embedding
         # [Sinh viên bổ sung]
-        embedded = self.embedding(text)         # (batch_size, seq_len, embedding_dim
+        embedded = self.embedding(text)         # (batch_size, seq_len, embedding_dim)
 
         # Đưa qua khối RNN để lấy hidden state cuối
         # [Sinh viên bổ sung]
