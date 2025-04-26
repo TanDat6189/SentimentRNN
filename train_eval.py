@@ -8,7 +8,7 @@ import json
 
 def train_and_evaluate(model, train_loader, test_loader, epochs=10, lr=0.01):
     # Khởi tạo loss function và optimizer SGD (không dùng Adam)
-    # [Sinh viên bổ sung: dùng CrossEntropyLoss và optim.SGD]
+    # [Dùng CrossEntropyLoss và optim.SGD]
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9)
 
@@ -16,7 +16,7 @@ def train_and_evaluate(model, train_loader, test_loader, epochs=10, lr=0.01):
     for epoch in range(epochs):
         model.train()
         for text, labels in train_loader:
-            # [Sinh viên bổ sung: forward, tính loss, backward, cập nhật trọng số bằng SGD]
+            # [Dùng forward, tính loss, backward, cập nhật trọng số bằng SGD]
             optimizer.zero_grad()
             outputs = model(text)       # (batch_size, output_dim)
             loss = criterion(outputs, labels)
@@ -30,7 +30,7 @@ def train_and_evaluate(model, train_loader, test_loader, epochs=10, lr=0.01):
     all_preds, all_labels = [], []
     with torch.no_grad():
         for text, labels in test_loader:
-            # [Sinh viên bổ sung: dự đoán và thu thập kết quả]
+            # [Dự đoán và thu thập kết quả]
             outputs = model(text)
             preds = torch.argmax(outputs, dim=1)
             all_preds.extend(preds.tolist())
@@ -48,9 +48,6 @@ for pretrained in [True, False]:
     acc, f1 = train_and_evaluate(model, train_loader, test_loader)
     results[key] = {"Accuracy": acc, "F1-score": f1}
     print(f"{key} - Accuracy: {acc:.4f}, F1-score: {f1:.4f}")
-
-    # Lưu lại mô hình đã huấn luyện
-    torch.save(model.state_dict(), f'my_model_pretrained_{pretrained}.pt')
 
 with open("results.json", "w") as f:
     json.dump(results, f, indent=4)
